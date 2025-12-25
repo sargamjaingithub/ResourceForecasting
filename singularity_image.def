@@ -1,0 +1,35 @@
+Bootstrap: docker
+From: rocm/dev-ubuntu-20.04:5.1.1
+    
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    
+    # Download the latest package lists
+    apt-get update -y
+
+    # Install os required tools and packages
+    apt-get install -y --no-install-recommends \
+    software-properties-common
+	
+    # Install python3.7
+    add-apt-repository ppa:deadsnakes/ppa -y && \
+    apt-get update -y && \
+    apt-get install python3.7 python3.7-dev python3.7-distutils python3-pip -y && \
+    ln -sf /usr/bin/python3.7 /usr/bin/python3
+	
+    # Install python packages
+    python3 -m pip install torch==1.12.0+rocm5.1.1 --index-url https://download.pytorch.org/whl/rocm5.1.1
+    
+    python3 -m pip install \
+    numpy==1.18.4 \
+    pandas==0.25.1 \
+    scikit-learn==0.23.1 \
+    scikit-optimize==0.9.0 \
+    scipy==1.4.1 \
+    captum==0.3.1 \
+    matplotlib==3.4.3 \
+    seaborn==0.9.0
+	
+    # Clean
+    rm -rf /var/lib/apt/lists/*
+

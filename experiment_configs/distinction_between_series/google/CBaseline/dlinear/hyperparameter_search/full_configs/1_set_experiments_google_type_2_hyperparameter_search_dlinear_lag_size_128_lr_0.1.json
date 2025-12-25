@@ -1,0 +1,126 @@
+{
+  "data": {
+    "source": {
+      "name": "google_2019",
+      "directory_path": "../input/data/google_third_preprocess_cluster_selection_pca_standarized",
+      "time_feature": "time_stamp",
+      "target_feature": "cpu_maximum_usage",
+      "batch_size": 512,
+      "preprocessing_steps": {
+        "global": [],
+        "values": [],
+        "target": []
+      },
+      "split": {
+        "name": "random",
+        "train_size": 0.7,
+        "val_size": 0.15
+      }
+    },
+    "type": {
+      "name": "full_values_unbiased_intervals",
+      "prediction_scope": 1,
+      "intervals": [
+        -0.125,
+        1.75,
+        3.625,
+        5.5,
+        7.375,
+        9.25,
+        11.125,
+        13.0,
+        14.875,
+        16.75,
+        18.625,
+        20.5,
+        22.375,
+        24.25,
+        26.125,
+        28.0,
+        29.875,
+        31.75,
+        33.625,
+        35.5,
+        37.375,
+        39.25,
+        41.125,
+        43.0,
+        44.875,
+        46.75,
+        48.625,
+        50.5,
+        52.375,
+        54.25,
+        56.125,
+        58.0,
+        59.875,
+        61.75,
+        63.625,
+        65.5,
+        67.375,
+        69.25,
+        71.125,
+        73.0
+      ],
+      "shuffle": true,
+      "batch_size": 2048,
+      "lag_size": 128,
+      "prediction_size": 1,
+      "data_loader": {
+        "num_workers": 6,
+        "drop_last": false
+      },
+      "output_visualization": {
+        "train_samples": 3,
+        "val_samples": 6,
+        "test_samples": 6,
+        "rate_predictions": 2,
+        "initial_color": "#c0e0de",
+        "values_color": "gray",
+        "target_color": "#3c474b",
+        "prediction_color_1": "#4f7cac",
+        "prediction_color_2": "#371e30"
+      }
+    }
+  },
+  "model": {
+    "type": {
+      "name": "neural_network",
+      "train_info": {
+        "number_epochs": 100,
+        "early_stopping": true,
+        "optimizer": {
+          "name": "Adam",
+          "args": {
+            "lr": 0.1,
+            "amsgrad": true
+          }
+        },
+        "loss_function": {
+          "name": "Default",
+          "criterion": "cross_entropy"
+        }
+      },
+      "transforms": [
+        {
+          "name": "weight_init",
+          "type": "gaussian",
+          "args": {
+            "mean": 0,
+            "std": 1
+          }
+        }
+      ]
+    },
+    "network": {
+      "name": "dlinear",
+      "args": {}
+    }
+  },
+  "logging": "INFO",
+  "save_model": false,
+  "save_charts": false,
+  "compute_evaluation": false,
+  "manual_seed": 0,
+  "device": "cuda"
+}

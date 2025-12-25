@@ -1,0 +1,85 @@
+{
+  "data": {
+    "source": {
+      "name": "google_2019",
+      "directory_path": "../input/data/google_third_preprocess_cluster_selection_pca_standarized",
+      "time_feature": "time_stamp",
+      "target_feature": "cpu_maximum_usage",
+      "batch_size": 512,
+      "preprocessing_steps": {
+        "global": [],
+        "values": [],
+        "target": []
+      },
+      "split": {
+        "name": "random",
+        "train_size": 0.7,
+        "val_size": 0.15
+      }
+    },
+    "type": {
+      "name": "full_values_unbiased",
+      "shuffle": true,
+      "batch_size": 2048,
+      "lag_size": 32,
+      "prediction_size": 1,
+      "data_loader": {
+        "num_workers": 1,
+        "drop_last": false
+      },
+      "output_visualization": {
+        "train_samples": 3,
+        "val_samples": 6,
+        "test_samples": 6,
+        "rate_predictions": 2,
+        "initial_color": "#c0e0de",
+        "values_color": "gray",
+        "target_color": "#3c474b",
+        "prediction_color_1": "#4f7cac",
+        "prediction_color_2": "#371e30"
+      }
+    }
+  },
+  "model": {
+    "type": {
+      "name": "machine_learning_algorithm"
+    },
+    "algorithm": {
+      "name": "svm",
+      "args": {
+        "with_search": {
+          "n_iter": 30,
+          "n_jobs": 1,
+          "pre_dispatch": 2,
+          "feature_selection": {
+            "n_components": 128
+          },
+          "grid_params": {
+            "C": [
+              0.0001,
+              1000.0,
+              "uniform"
+            ],
+            "epsilon": [
+              0.0,
+              4.0,
+              "uniform"
+            ]
+          },
+          "default_params": {
+            "loss": "squared_epsilon_insensitive",
+            "dual": false,
+            "max_iter": 1000,
+            "random_state": 0
+          }
+        }
+      }
+    }
+  },
+  "logging": "INFO",
+  "save_model": true,
+  "save_charts": true,
+  "compute_evaluation": true,
+  "manual_seed": 0,
+  "device": "cpu"
+}

@@ -1,0 +1,128 @@
+{
+  "data": {
+    "source": {
+      "name": "google_2019",
+      "directory_path": "../input/data/google_third_preprocess_cluster_selection_pca_standarized",
+      "time_feature": "time_stamp",
+      "target_feature": "cpu_maximum_usage",
+      "batch_size": 512,
+      "preprocessing_steps": {
+        "global": [
+          {
+            "name": "select_feature_expand",
+            "feature": "cpu_maximum_usage"
+          }
+        ],
+        "values": [],
+        "target": []
+      },
+      "split": {
+        "name": "random",
+        "train_size": 0.7,
+        "val_size": 0.15
+      }
+    },
+    "type": {
+      "name": "full_values_unbiased_intervals",
+      "prediction_scope": 1,
+      "intervals": [
+        -0.125,
+        1.75,
+        3.625,
+        5.5,
+        7.375,
+        9.25,
+        11.125,
+        13.0,
+        14.875,
+        16.75,
+        18.625,
+        20.5,
+        22.375,
+        24.25,
+        26.125,
+        28.0,
+        29.875,
+        31.75,
+        33.625,
+        35.5,
+        37.375,
+        39.25,
+        41.125,
+        43.0,
+        44.875,
+        46.75,
+        48.625,
+        50.5,
+        52.375,
+        54.25,
+        56.125,
+        58.0,
+        59.875,
+        61.75,
+        63.625,
+        65.5,
+        67.375,
+        69.25,
+        71.125,
+        73.0
+      ],
+      "shuffle": true,
+      "batch_size": 2048,
+      "lag_size": 128,
+      "prediction_size": 1,
+      "data_loader": {
+        "num_workers": 1,
+        "drop_last": false
+      },
+      "output_visualization": {
+        "train_samples": 3,
+        "val_samples": 6,
+        "test_samples": 6,
+        "rate_predictions": 2,
+        "initial_color": "#c0e0de",
+        "values_color": "gray",
+        "target_color": "#3c474b",
+        "prediction_color_1": "#4f7cac",
+        "prediction_color_2": "#371e30"
+      }
+    }
+  },
+  "model": {
+    "type": {
+      "name": "machine_learning_algorithm"
+    },
+    "algorithm": {
+      "name": "svm",
+      "args": {
+        "with_search": {
+          "n_iter": 30,
+          "n_jobs": 1,
+          "pre_dispatch": 2,
+          "feature_selection": {
+            "n_components": 32
+          },
+          "grid_params": {
+            "C": [
+              0.0001,
+              1000.0,
+              "uniform"
+            ]
+          },
+          "default_params": {
+            "loss": "squared_hinge",
+            "dual": false,
+            "max_iter": 1000,
+            "random_state": 0
+          }
+        }
+      }
+    }
+  },
+  "logging": "INFO",
+  "save_model": true,
+  "save_charts": true,
+  "compute_evaluation": true,
+  "manual_seed": 0,
+  "device": "cpu"
+}
