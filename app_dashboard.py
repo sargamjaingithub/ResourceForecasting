@@ -6,6 +6,8 @@ Run: streamlit run app_dashboard.py
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')  # Set backend before importing pyplot
 import matplotlib.pyplot as plt
 import json
 import os
